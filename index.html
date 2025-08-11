@@ -1,161 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Schools of Youngtec - Result Viewer</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Feather Icons -->
-  <script src="https://unpkg.com/feather-icons"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schools of Youngtec Results Portal</title>
   <style>
     body {
-      background: #e9f0ff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f5f8fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
     .container {
-      max-width: 600px;
-      margin: 4rem auto;
-      background: white;
+      background: #fff;
+      padding: 30px;
       border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 350px;
     }
     .logo {
-      display: block;
-      margin: 0 auto 1rem;
-      max-width: 150px;
+      width: 80px;
+      margin-bottom: 15px;
     }
-    h3 {
+    h1 {
+      font-size: 1.2rem;
       color: #003366;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
-    .btn-primary {
-      background-color: #003366;
-      border-color: #002244;
-    }
-    .btn-primary:hover {
-      background-color: #002244;
-      border-color: #001622;
-    }
-    a.pdf-link {
-      color: #003366;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    a.pdf-link:hover {
-      text-decoration: underline;
-    }
-    .footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: #555;
+    p {
       font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      background: #003366;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #00509e;
+    }
+    .error {
+      color: red;
+      font-size: 0.85rem;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <img src="logo.png" alt="Schools of Youngtec Logo" class="logo" />
-    <h3>Youngtec Result Portal</h3>
-
-    <form id="accessForm" class="mb-4">
-      <label for="accessCode" class="form-label">Enter Access Code</label>
-      <input
-        type="text"
-        id="accessCode"
-        class="form-control"
-        placeholder="e.g. TOLAREAL2324"
-        required
-        autocomplete="off"
-      />
-      <button type="submit" class="btn btn-primary mt-3 w-100">
-        <i data-feather="unlock"></i> View Result
-      </button>
-    </form>
-
-    <div id="resultArea"></div>
-
-    <div class="footer">
-      &copy; 2025 Schools of Youngtec. All rights reserved.
-    </div>
+    <img src="logo.png" alt="School Logo" class="logo">
+    <h1>Youngtec eResults Portal</h1>
+    <p>Enter your Access Code to download your result as PDF.</p>
+    <input type="text" id="accessCode" placeholder="Enter Access Code" required>
+    <button onclick="getResult()">Get Result</button>
+    <div class="error" id="errorMsg"></div>
   </div>
 
   <script>
-    feather.replace();
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyN2d-P2NCYQzFvBUOQ4pdsi9sG_p0frg24aTtyQp5NDzJoMTJ5GODy-pGZtk9V_JWXqQ/exec"; // Replace with your deployed Apps Script Web App URL
 
-    const API_KEY = 'AIzaSyDddxKOKOCYV-RwZ82GF0RJPpA_faGdhuc';  // Your real API key here
-    const SPREADSHEET_ID = '1L0-LPQCshYLNXMaA-XzRvKC32ppZjbhHdwvlvwG7Jbw';
-    const SHEET_NAME = 'Student_Results_DB';  // or your actual sheet tab name
+    async function getResult() {
+      const accessCode = document.getElementById('accessCode').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      errorMsg.textContent = "";
 
-    async function fetchSheetData() {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch data');
-      const data = await response.json();
-      return data.values;
-    }
-
-    function createPDFLink(url) {
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="pdf-link"><i data-feather="file-text"></i> View/Download PDF</a>`;
-    }
-
-    document.getElementById('accessForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const accessCode = document.getElementById('accessCode').value.trim().toUpperCase();
-      const resultArea = document.getElementById('resultArea');
-      resultArea.innerHTML = `<div class="text-info">Checking access code...</div>`;
+      if (!accessCode) {
+        errorMsg.textContent = "Please enter an access code.";
+        return;
+      }
 
       try {
-        const sheetData = await fetchSheetData();
-        const headers = sheetData[0];
-        const rows = sheetData.slice(1);
+        const response = await fetch(scriptURL);
+        if (!response.ok) throw new Error("Network error");
 
-        const matches = rows.filter(row => row[0].toUpperCase() === accessCode);
+        const data = await response.json();
+        const match = data.find(item => item.accessCode === accessCode);
 
-        if (matches.length === 0) {
-          resultArea.innerHTML = `<div class="alert alert-danger">Access code not found. Please check and try again.</div>`;
-          return;
+        if (match && match.pdfLink) {
+          window.open(match.pdfLink, "_blank");
+        } else {
+          errorMsg.textContent = "Invalid Access Code. Please try again.";
         }
-
-        let html = `<h5>Results for Access Code: <strong>${accessCode}</strong></h5>`;
-        html += `<table class="table table-striped mt-3"><thead><tr>`;
-
-        // Display headers except the access code column and last (assuming last is PDF URL)
-        for (let i = 1; i < headers.length - 1; i++) {
-          html += `<th>${headers[i]}</th>`;
-        }
-        html += `<th>Result PDF</th></tr></thead><tbody>`;
-
-        matches.forEach(row => {
-          html += `<tr>`;
-          for (let i = 1; i < headers.length - 1; i++) {
-            html += `<td>${row[i] || ''}</td>`;
-          }
-          const pdfUrl = row[headers.length - 1];
-          if (pdfUrl) {
-            html += `<td>${createPDFLink(pdfUrl)}</td>`;
-          } else {
-            html += `<td><em>No PDF available</em></td>`;
-          }
-          html += `</tr>`;
-        });
-
-        html += `</tbody></table>`;
-
-        resultArea.innerHTML = html;
-        feather.replace();
-
       } catch (err) {
-        resultArea.innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;
+        errorMsg.textContent = "Unable to fetch results. Please try later.";
       }
-    });
+    }
   </script>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
