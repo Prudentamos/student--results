@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel - Youngtec Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #222;
+    }
+    .navbar {
+      background-color: #1e3c72 !important;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: #ffd43b !important;
+    }
+    .nav-link {
+      font-weight: 500;
+      color: #e2e6ea !important;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #ffd43b !important;
+    }
+    main.container {
+      flex-grow: 1;
+      background: #fff;
+      max-width: 900px;
+      margin: 3rem auto 4rem;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+    h2 {
+      color: #1e3c72;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    section h3 {
+      color: #294eaa;
+      font-weight: 600;
+      border-bottom: 2px solid #ffd43b;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    .alert-info {
+      font-size: 1rem;
+    }
+    /* Simple form styles */
+    form label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+      color: #1e3c72;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1rem;
+      border: 1.5px solid #1e3c72;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    form input:focus, form textarea:focus, form select:focus {
+      border-color: #ffd43b;
+      outline: none;
+      box-shadow: 0 0 8px #ffd43baa;
+    }
+    button.btn-primary {
+      background: #1e3c72;
+      border: none;
+      font-weight: 600;
+      border-radius: 0.6rem;
+      padding: 0.75rem 1.2rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 15px rgba(30, 60, 114, 0.5);
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    button.btn-primary:hover {
+      background: #294eaa;
+      box-shadow: 0 6px 20px rgba(41, 78, 170, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Schools of Youngtec Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="admin.html">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container" role="main" aria-labelledby="adminTitle">
+  <h2 id="adminTitle">Admin Dashboard</h2>
+
+  <section aria-labelledby="manageResultsTitle">
+    <h3 id="manageResultsTitle">Manage Student Results</h3>
+    <p>Upload new student results, update existing PDF links, and maintain accurate access codes for parents to retrieve results.</p>
+    <form id="uploadForm" novalidate>
+      <label for="studentId">Student ID / Access Code</label>
+      <input type="text" id="studentId" name="studentId" placeholder="Enter student ID or access code" required />
+
+      <label for="pdfLink">Result PDF Link</label>
+      <input type="url" id="pdfLink" name="pdfLink" placeholder="Paste the URL of the PDF result" required />
+
+      <button type="submit" class="btn btn-primary w-100">Upload / Update</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="dataSyncTitle">
+    <h3 id="dataSyncTitle">Data Synchronization</h3>
+    <p>The admin panel is connected to the Google Sheets backend for real-time updates. Ensure all uploads are accurate to prevent data mismatches.</p>
+  </section>
+
+  <section aria-labelledby="securityTitle">
+    <h3 id="securityTitle">Security Reminders</h3>
+    <ul>
+      <li>Keep access codes confidential and do not share them publicly.</li>
+      <li>Regularly update passwords and monitor access logs.</li>
+      <li>Only authorized personnel should access this panel.</li>
+      <li>Ensure secure connections (HTTPS) when uploading data.</li>
+    </ul>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Placeholder: implement upload logic with your backend or API here
+    alert('This feature is coming soon. Please integrate with your backend.');
+  });
+</script>
+
+</body>
+</html>

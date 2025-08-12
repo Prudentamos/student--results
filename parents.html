@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parents - Schools of Youngtec</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #f8f9fa !important;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .nav-link {
+      font-weight: 500;
+      color: #e2e6ea !important;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #ffd43b !important;
+    }
+    main.container {
+      flex-grow: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      background: #ffffffee;
+      margin: 3rem auto 4rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+    h2 {
+      color: #1e3c72;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+    /* Section titles */
+    h3 {
+      color: #294eaa;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      border-bottom: 2px solid #ffd43b;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    p, li {
+      font-size: 1.05rem;
+      color: #333;
+      line-height: 1.6;
+    }
+    ul.announcements {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+    /* Footer */
+    footer {
+      background-color: #0b2545;
+      color: #f8f9fa;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      user-select: none;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Schools of Youngtec Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="parents.html">Parents</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container" role="main" aria-labelledby="pageTitle">
+  <h2 id="pageTitle">Information for Parents</h2>
+  
+  <section aria-label="Welcome message">
+    <p>Welcome to the Schools of Youngtec Parent Portal. Here, you’ll find all essential information and updates to support your child’s academic journey and well-being.</p>
+  </section>
+  
+  <section aria-labelledby="academicCalendarTitle">
+    <h3 id="academicCalendarTitle">Academic Calendar 2025</h3>
+    <ul>
+      <li>Term 1: January 15 – April 25</li>
+      <li>Midterm Break: March 10 – March 14</li>
+      <li>Term 2: May 5 – August 15</li>
+      <li>Summer Break: August 16 – September 5</li>
+      <li>Term 3: September 15 – December 19</li>
+      <li>Christmas Break: December 13 – January 14, 2026</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="announcementsTitle">
+    <h3 id="announcementsTitle">Latest Announcements</h3>
+    <ul class="announcements">
+      <li><strong>End of Session Party:</strong> Thank you to all parents who joined the 2025-2026 End of Session Celebration. Photos and highlights are available in our <a href="gallery.html" class="link-primary">Gallery</a>.</li>
+      <li><strong>Next Academic Session Billing:</strong> Download your child’s <a href="school-fee-bill.pdf" class="link-primary" target="_blank" rel="noopener noreferrer">School Fee Bill</a> for the 2026 session now.</li>
+      <li><strong>Parent-Teacher Meeting:</strong> Scheduled for November 20, 2025. Please confirm attendance via the school office.</li>
+      <li><strong>COVID-19 Safety:</strong> Continue to follow health protocols to ensure everyone’s safety on campus.</li>
+      <li><strong>School Uniforms:</strong> Available at the school shop. New designs introduced this year.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="parentGuidesTitle">
+    <h3 id="parentGuidesTitle">Guides & Resources</h3>
+    <ul>
+      <li><a href="parent-handbook.pdf" target="_blank" rel="noopener noreferrer" class="link-primary">Parent Handbook</a> - Policies, procedures, and school rules.</li>
+      <li><a href="academic-support.html" class="link-primary">Academic Support</a> - Tutoring and after-school programs.</li>
+      <li><a href="health-services.html" class="link-primary">Health Services</a> - Onsite medical assistance and counseling.</li>
+      <li><a href="extracurricular.html" class="link-primary">Extracurricular Activities</a> - Sports, clubs, and arts programs.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Schools of Youngtec. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
