@@ -171,18 +171,21 @@
       return;
     }
 
-    // Replace YOUR_APPS_SCRIPT_WEBAPP_URL with your real endpoint
-    const apiUrl = "https://script.google.com/macros/s/AKfycbyT4FMs42uwJYGxC26nLCxD3N4Dked4T5ONpKcqhhqR-7ASei2KYmsPOX-mr2HhVBarIg/exec" + encodeURIComponent(code);
+    // Correct URL with ?accessCode= parameter
+    const apiUrl = "https://script.google.com/macros/s/AKfycbyT4FMs42uwJYGxC26nLCxD3N4Dked4T5ONpKcqhhqR-7ASei2KYmsPOX-mr2HhVBarIg/exec?accessCode=" + encodeURIComponent(code);
 
     fetch(apiUrl)
       .then(res => res.json())
       .then(data => {
-        if (data.pdf) {
+        if (data.pdfLinks && data.pdfLinks.length > 0) {
+          const firstPdfLink = data.pdfLinks[0];
           resultDiv.innerHTML = `<div class="alert alert-success">
-            Result found! <a href="${data.pdf}" target="_blank" rel="noopener noreferrer" class="alert-link">Click here to view/download</a>
+            Result found! <a href="${firstPdfLink}" target="_blank" rel="noopener noreferrer" class="alert-link">Click here to view/download</a>
           </div>`;
+        } else if (data.error) {
+          resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
         } else {
-          resultDiv.innerHTML = `<div class="alert alert-danger">Invalid Access Code</div>`;
+          resultDiv.innerHTML = `<div class="alert alert-warning">No result found for the given access code.</div>`;
         }
       })
       .catch(() => {
